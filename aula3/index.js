@@ -1,12 +1,32 @@
-const calculadora = require('./calculadora')
-const minimist = require('minimist')
+const inquirer = require('inquirer');
+const chalk = require('chalk');
+const imc = require('./imc');
 
-var argv = minimist(process.argv.slice(2))
+async function main() 
+  const respostas = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'altura',
+      message: 'Digite sua altura em centímetros:',
+      validate: (valor) => {
+        if (isNaN(valor) || valor <= 0) {
+          return 'Por favor, digite um número válido.';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'input',
+      name: 'peso',
+      message: 'Digite seu peso em quilogramas:',
+      validate: (valor) => {
+        if (isNaN(valor) || valor <= 0) {
+          return 'Por favor, digite um número válido.';
+        }
+        return true;
+      },
+    },
+  ]);
 
-console.log(argv={nome:"Thiago",idade:15})
-
-const nome = argv["nome"]
-const idade = argv["idade"]
-
-console.log(`nome: ${nome} |idade: $(idade)`)
-
+  const altura = parseFloat(respostas.altura);
+  const peso = parseFloat(respostas.peso);
