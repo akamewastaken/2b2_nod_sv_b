@@ -1,5 +1,11 @@
-const imc = require('./amc')
+const imc = require('./imc')
 const inquirer = require('inquirer');
+
+
+const fs = require('fs');
+const { default: chalk } = require('chalk');
+function operation() {
+
 
 inquirer
   .prompt([
@@ -9,14 +15,15 @@ inquirer
         message:'qual é sua altura em cm?';
     };
     {
-        type:'list'
-        name:'peso'
-        message:'qual é seu peso em kg?';
-    };
+      type:'list'
+      name:'peso'
+      message:'qual é seu peso em kg?';
+  };
   ] 
   )
   .then(answers) => 
     console.log(chalk.bold('resposta:', answers))
+}
 
 
 
